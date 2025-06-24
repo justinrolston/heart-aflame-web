@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Aflame - Confessional Devotional App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #3c2e26;
+            background: linear-gradient(135deg, #f5f2ed 0%, #e8e0d1 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(160, 133, 107, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #d4b896 0%, #a0856b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .flame-icon {
+            width: 24px;
+            height: 30px;
+            position: relative;
+        }
+        
+        .flame-main {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 22px;
+            background: linear-gradient(180deg, #ff4444 0%, #ff6b35 25%, #f7931e 60%, #ffd23f 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+        
+        .flame-left {
+            position: absolute;
+            bottom: 2px;
+            left: 1px;
+            width: 10px;
+            height: 16px;
+            background: linear-gradient(180deg, #ff6644 0%, #ff7735 40%, #ffa31e 80%);
+            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+            transform: rotate(-15deg);
+        }
+        
+        .flame-right {
+            position: absolute;
+            bottom: 3px;
+            right: 0px;
+            width: 12px;
+            height: 18px;
+            background: linear-gradient(180deg, #ff5544 0%, #ff8035 35%, #ffb31e 75%);
+            border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+            transform: rotate(20deg);
+        }
+        
+        .flame-core {
+            position: absolute;
+            bottom: 1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 14px;
+            background: linear-gradient(180deg, #ffaa44 0%, #ffd23f 50%, #fff5aa 100%);
+            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3c2e26;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #6b5b4d;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #a0856b;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 120px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #3c2e26;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 20px;
+            color: #a0856b;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .hero .description {
+            font-size: 18px;
+            color: #6b5b4d;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4b896 0%, #a0856b 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px rgba(160, 133, 107, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(160, 133, 107, 0.4);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #3c2e26;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #d4b896 0%, #a0856b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #3c2e26;
+        }
+        
+        .feature-card p {
+            color: #6b5b4d;
+            line-height: 1.6;
+        }
+        
+        /* Sample Devotion */
+        .sample {
+            padding: 80px 0;
+        }
+        
+        .sample h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #3c2e26;
+        }
+        
+        .devotion-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            border-left: 6px solid #a0856b;
+        }
+        
+        .devotion-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3c2e26;
+            margin-bottom: 20px;
+        }
+        
+        .scripture {
+            background: linear-gradient(135deg, #f5f2ed 0%, #e8e0d1 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #6b5b4d;
+            border-left: 4px solid #d4b896;
+        }
+        
+        .reflection {
+            color: #6b5b4d;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .confessional {
+            background: rgba(212, 184, 150, 0.15);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #6b5b4d;
+        }
+        
+        .prayer {
+            color: #a0856b;
+            font-weight: 500;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+        }
+        
+        /* Email Signup */
+        .signup {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #3c2e26 0%, #6b5b4d 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .signup h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .signup p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .email-form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .email-button {
+            background: linear-gradient(135deg, #d4b896 0%, #a0856b 100%);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .email-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            color: #6b5b4d;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero .subtitle {
+                font-size: 18px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .email-form {
+                flex-direction: column;
+            }
+            
+            .devotion-card {
+                margin: 0 20px;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <div class="flame-icon">
+                            <div class="flame-left"></div>
+                            <div class="flame-main"></div>
+                            <div class="flame-right"></div>
+                            <div class="flame-core"></div>
+                        </div>
+                    </div>
+                    <span class="logo-text">Heart Aflame</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#sample">Sample</a></li>
+                    <li><a href="#early-access">Early Access</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Daily Doctrine<br>Rooted in Truth</h1>
+                <p class="subtitle">Confessional devotions for the faithful heart</p>
+                <p class="description">
+                    Cultivate daily spiritual habits with theologically rich, bite-sized devotions grounded in Scripture and the historic confessions. Just 2-3 minutes a day to anchor your soul in eternal truth.
+                </p>
+                <a href="#early-access" class="cta-button">Get Early Access</a>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2>Scripture. Confession. Prayer.</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📖</div>
+                        <h3>Biblical Foundation</h3>
+                        <p>Every devotion begins with God's Word, offering rich exposition rooted in the tradition of Scripture alone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⛪</div>
+                        <h3>Confessional Grounding</h3>
+                        <p>Connect daily truths to the Westminster Standards, Heidelberg Catechism, and other historic confessions of faith.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⏱️</div>
+                        <h3>Micro-Learning Format</h3>
+                        <p>Perfect for busy schedules. Deep theological truth delivered in digestible, 2-3 minute daily portions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔥</div>
+                        <h3>Heart Transformation</h3>
+                        <p>Not just head knowledge—devotions designed to kindle affection for Christ and transform daily living.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Habit-Building Design</h3>
+                        <p>Thoughtfully crafted to help you build consistent spiritual rhythms without overwhelming your day.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Theological Depth</h3>
+                        <p>Unlike generic devotionals, every reflection is anchored in the five solas and confessional understanding of grace.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sample" id="sample">
+            <div class="container">
+                <h2>Sample Devotion</h2>
+                <div class="devotion-card">
+                    <div class="devotion-title">Christ, Our Only Comfort</div>
+                    
+                    <div class="scripture">
+                        <strong>Scripture:</strong><br>
+                        "For if we live, we live to the Lord, and if we die, we die to the Lord. So then, whether we live or whether we die, we are the Lord's."<br>
+                        <em>— Romans 14:8</em>
+                    </div>
+                    
+                    <div class="reflection">
+                        <strong>Reflection:</strong><br>
+                        The Christian's comfort is not found in circumstances, health, or success—but in belonging to Christ. In life and in death, our identity is secure because we are His. This truth is not only doctrinal—it is deeply personal and pastoral.
+                    </div>
+                    
+                    <div class="confessional">
+                        <strong>Confessional Tie-in:</strong><br>
+                        "That I am not my own, but belong—body and soul, in life and in death—to my faithful Savior, Jesus Christ."<br>
+                        <em>— Heidelberg Catechism, Q1</em>
+                    </div>
+                    
+                    <div class="prayer">
+                        <strong>Prayer:</strong><br>
+                        Lord, thank You that I am not my own. Help me to rest in the comfort of belonging fully to You today.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="signup" id="early-access">
+            <div class="container">
+                <h2>Coming Early 2025</h2>
+                <p>Be among the first to experience confessional devotions designed for the modern believer</p>
+                <form class="email-form">
+                    <input type="email" class="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="email-button">Get Early Access</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Heart Aflame. Building devotional habits anchored in eternal truth.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission (placeholder)
+        document.querySelector('.email-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            alert('Thank you for your interest! We\'ll be in touch soon.');
+            this.querySelector('input').value = '';
+        });
+    </script>
+</body>
+</html>
