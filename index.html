@@ -517,12 +517,55 @@
             });
         });
 
-        // Form submission (placeholder)
+        // Form submission with Google Apps Script
         document.querySelector('.email-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            
             const email = this.querySelector('input').value;
-            alert('Thank you for your interest! We\'ll be in touch soon.');
-            this.querySelector('input').value = '';
+            const submitButton = this.querySelector('.email-button');
+            const originalText = submitButton.textContent;
+            
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Show loading state
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
+            
+            // Replace 'YOUR_SCRIPT_URL' with your actual Google Apps Script URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyKHKplxVbazdrUTZ-vbde0aBCKQ21kz6ZHOfUuWD9d0FrEdNMHYUEaTgVqhQych8Q/exec';
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `email=${encodeURIComponent(email)}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.includes('success')) {
+                    alert('Thank you for your interest! We\'ll be in touch soon.');
+                    this.querySelector('input').value = '';
+                } else if (data.includes('duplicate')) {
+                    alert('This email is already registered for early access.');
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Sorry, there was an error submitting your email. Please try again.');
+            })
+            .finally(() => {
+                // Reset button state
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            });
         });
     </script>
 </body>
