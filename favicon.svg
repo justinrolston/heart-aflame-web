@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4b896"/>
+      <stop offset="100%" style="stop-color:#a0856b"/>
+    </linearGradient>
+    <!-- Main flame gradient -->
+    <linearGradient id="mainFlame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff4444"/>
+      <stop offset="25%" style="stop-color:#ff6b35"/>
+      <stop offset="60%" style="stop-color:#f7931e"/>
+      <stop offset="100%" style="stop-color:#ffd23f"/>
+    </linearGradient>
+    <!-- Left flame gradient -->
+    <linearGradient id="leftFlame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6644"/>
+      <stop offset="40%" style="stop-color:#ff7735"/>
+      <stop offset="80%" style="stop-color:#ffa31e"/>
+    </linearGradient>
+    <!-- Right flame gradient -->
+    <linearGradient id="rightFlame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff5544"/>
+      <stop offset="35%" style="stop-color:#ff8035"/>
+      <stop offset="75%" style="stop-color:#ffb31e"/>
+    </linearGradient>
+    <!-- Core flame gradient -->
+    <linearGradient id="coreFlame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffaa44"/>
+      <stop offset="50%" style="stop-color:#ffd23f"/>
+      <stop offset="100%" style="stop-color:#fff5aa"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background container -->
+  <rect width="32" height="32" rx="4" fill="url(#bgGrad)"/>
+  
+  <!-- Left flame -->
+  <ellipse cx="11" cy="22" rx="4" ry="7" fill="url(#leftFlame)" transform="rotate(-15 11 22)" style="border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%"/>
+  
+  <!-- Right flame -->
+  <ellipse cx="21" cy="21" rx="5" ry="8" fill="url(#rightFlame)" transform="rotate(20 21 21)" style="border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%"/>
+  
+  <!-- Main flame -->
+  <ellipse cx="16" cy="20" rx="6.5" ry="9.5" fill="url(#mainFlame)" style="border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%"/>
+  
+  <!-- Core flame -->
+  <ellipse cx="16" cy="21" rx="3.5" ry="6" fill="url(#coreFlame)" style="border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%"/>
+</svg>
