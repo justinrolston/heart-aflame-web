@@ -491,47 +491,118 @@
         <div class="section-card">
             <h2>Our Mission</h2>
             <p class="content-text">Heart Aflame provides Reformed believers with daily spiritual nourishment through Scripture-based devotions that are both theologically rich and practically accessible. Each devotion should take 2-5 minutes to read and help cultivate consistent spiritual habits while grounding users in biblical truth.</p>
-            
+
             <div class="highlight-box">
                 <strong>Key Principle:</strong> We aim to kindle affection for Christ and transform daily living through deep theological truth delivered in digestible portions.
             </div>
         </div>
 
         <div class="section-card">
-            <div class="section-title">Devotion Structure</div>
+            <div class="section-title">Admin Application Overview</div>
+            <p class="content-text">Heart Aflame uses a robust admin system for content creation and management. Here's what powers the devotional creation process:</p>
+
+            <h3>Technology Stack</h3>
+            <ul>
+                <li><strong>Backend:</strong> Ruby 3.4.1 with Sinatra framework</li>
+                <li><strong>Database:</strong> Firebase Realtime Database (not Firestore)</li>
+                <li><strong>Templates:</strong> ERB templates with responsive CSS design</li>
+                <li><strong>Testing:</strong> RSpec framework with 102 comprehensive tests</li>
+                <li><strong>Deployment:</strong> Fly.io with Docker and GitHub Actions CI/CD</li>
+            </ul>
+
+            <h3>Admin Features</h3>
+            <ul>
+                <li>Tab-based editor with live preview functionality</li>
+                <li>Author attribution support for guest contributors</li>
+                <li>Enhanced quotation integration (confessional/catechetical references)</li>
+                <li>Additional resources management with URL validation</li>
+                <li>Markdown import with YAML front matter support</li>
+                <li>JSON export functionality for mobile app integration</li>
+                <li>Responsive design optimized for mobile and desktop use</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Quality Assurance:</strong> The admin system includes comprehensive data validation, character limits, format checking, CSRF protection, and real-time synchronization with the mobile app.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Current JSON Data Structure</div>
+            <p class="content-text">The admin system uses the following JSON structure for storing devotional content (updated 2024):</p>
+
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; overflow-x: auto; color: var(--text-secondary);">{
+  "daily": {
+    "YYYY-MM-DD": {
+      "dailyDevo": {
+        "title": "Devotional Title",
+        "author": "Author Name (optional)",
+        "scriptureRef": "Bible Reference",
+        "scriptureText": "Scripture verse text",
+        "reflection": "Main devotional content",
+        "quotationText": "Quote from confession/catechism (optional)",
+        "quotationRef": "Source reference (optional)",
+        "prayerPrompt": "Prayer guidance (optional)",
+        "goDeeper": "Additional study suggestions (optional)",
+        "additionalLinks": [
+          {
+            "title": "Link Title",
+            "url": "https://example.com"
+          }
+        ]
+      }
+    }
+  }
+}</pre>
+            </div>
+
+            <div class="warning-box">
+                <strong>Migration Note:</strong> The admin system gracefully handles both old and new JSON formats during transition. Legacy devotionals continue to work while new devotionals use the enhanced structure with automatic format conversion for mobile app compatibility.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Devotion Structure & Fields</div>
             <p class="content-text">Each devotion follows a consistent format using the admin interface. Here are the required and optional fields:</p>
-            
+
             <ul class="field-list">
                 <li><span class="field-name">Title</span> <span class="required">(Required)</span><br>
                 A compelling, descriptive title that captures the essence of your devotion</li>
-                
+
                 <li><span class="field-name">Date</span> <span class="required">(Required)</span><br>
                 Selected from the calendar interface - coordinate with leadership for series timing</li>
-                
-                <li><span class="field-name">Scripture Question</span> <span class="optional">(Optional)</span><br>
-                A thought-provoking question to introduce the Scripture passage</li>
-                
+
+                <li><span class="field-name">Author</span> <span class="optional">(Optional - New)</span><br>
+                Author attribution for guest contributors and content creators</li>
+
                 <li><span class="field-name">Scripture Reference</span> <span class="required">(Required)</span><br>
                 Biblical reference using ESV translation (e.g., "Romans 14:8")</li>
-                
+
                 <li><span class="field-name">Scripture Text</span> <span class="required">(Required)</span><br>
                 The full Scripture passage from the ESV</li>
-                
+
                 <li><span class="field-name">Reflection</span> <span class="required">(Required)</span><br>
                 The main devotional content connecting Scripture to daily life</li>
-                
-                <li><span class="field-name">Confessional Tie-in</span> <span class="optional">(Optional)</span><br>
-                Quote and explanation from Reformed confessions or catechisms</li>
-                
-                <li><span class="field-name">Confession Reference</span> <span class="optional">(Optional)</span><br>
-                Specific reference (e.g., "Westminster Shorter Catechism Q. 1")</li>
-                
-                <li><span class="field-name">Prayer Prompt</span> <span class="required">(Required)</span><br>
+
+                <li><span class="field-name">Quotation Text</span> <span class="optional">(Optional)</span><br>
+                Quote from Reformed confessions, catechisms, or theological sources (formerly "Confessional Tie-in")</li>
+
+                <li><span class="field-name">Quotation Reference</span> <span class="optional">(Optional)</span><br>
+                Specific source reference (e.g., "Westminster Shorter Catechism Q. 1", formerly "Confession Reference")</li>
+
+                <li><span class="field-name">Prayer Prompt</span> <span class="optional">(Optional)</span><br>
                 A brief prayer or prayer guide related to the devotion's theme</li>
-                
-                <li><span class="field-name">Go Deeper</span> <span class="required">(Required)</span><br>
+
+                <li><span class="field-name">Go Deeper</span> <span class="optional">(Optional)</span><br>
                 Additional reflection questions, applications, or theological insights</li>
+
+                <li><span class="field-name">Additional Links</span> <span class="optional">(Optional - New)</span><br>
+                Array of related resources with titles and URLs, validated for proper formatting</li>
             </ul>
+
+            <div class="highlight-box">
+                <strong>Key Changes:</strong> Scripture questions have been removed from the current structure. The quotation fields have been simplified and renamed for clarity. Author attribution and additional resource links are now supported.
+            </div>
         </div>
 
         <div class="section-card">
@@ -561,7 +632,7 @@
             </ul>
 
             <div class="warning-box">
-                <strong>Important:</strong> While confessional tie-ins are optional, they add significant value when you can authentically connect Scripture to the Westminster Standards, Heidelberg Catechism, Belgic Confession, or other Reformed confessions.
+                <strong>Important:</strong> While quotation text is optional, it adds significant value when you can authentically connect Scripture to the Westminster Standards, Heidelberg Catechism, Belgic Confession, or other Reformed theological sources.
             </div>
         </div>
 
@@ -576,22 +647,21 @@
                 
                 <div class="scripture-card">
                     <div class="scripture-header">Today's Scripture</div>
-                    <div class="scripture-question">What is our comfort in life and death?</div>
                     <div class="scripture-quote">
                         For if we live, we live to the Lord; and if we die, we die to the Lord. So, whether we live or die, we belong to the Lord.
                         <div class="scripture-reference">— Romans 14:8</div>
                     </div>
                 </div>
-                
+
                 <div class="content-card">
                     <div class="content-header">Reflection</div>
                     <div class="content-text">
                         The Christian's comfort is not found in circumstances, but in the unshakeable truth that we belong to Christ. In both life and death, we are His, and He is ours. This belonging is not merely emotional or sentimental—it is a legal reality, purchased by Christ's blood and sealed by His Spirit.
                     </div>
                 </div>
-                
+
                 <div class="content-card">
-                    <div class="content-header">Confessional Tie-in</div>
+                    <div class="content-header">Quotation</div>
                     <div class="confessional-quote">
                         That I am not my own, but belong—body and soul, in life and in death—to my faithful Savior, Jesus Christ.
                         <div class="confessional-reference">— Heidelberg Catechism Q1</div>
@@ -669,18 +739,83 @@
         </div>
 
         <div class="section-card">
+            <div class="section-title">Markdown Import Format</div>
+            <p class="content-text">The admin system supports importing devotional content via Markdown files with YAML front matter. This is especially useful for content creators who prefer to write in their favorite editor.</p>
+
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; overflow-x: auto; color: var(--text-secondary);">---
+title: "Devotional Title"
+date: YYYY-MM-DD
+author: "Author Name (optional)"
+scripture_reference: "Bible Reference"
+confessional_tie_in: "Quotation text (optional)"
+confession_reference: "Reference source (optional)"
+prayer: "Prayer prompt (optional)"
+go_deeper: "Study suggestions (optional)"
+additional_links:
+  - title: "Resource Title"
+    url: "https://example.com"
+---
+
+## Scripture Text
+[Scripture verse text]
+
+## Reflection
+[Main devotional content]</pre>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Note:</strong> The YAML front matter field names differ slightly from the JSON structure for readability. The admin system automatically converts between formats during import and export.
+            </div>
+        </div>
+
+        <div class="section-card">
             <div class="section-title">Using the Admin Interface</div>
             <ol>
                 <li><strong>Access the calendar</strong> to select your desired date(s) for publication</li>
                 <li><strong>Click "Create Devotion"</strong> to open the editor interface</li>
                 <li><strong>Fill in all required fields</strong> (marked with asterisks in the system)</li>
-                <li><strong>Add optional fields</strong> like confessional tie-ins when appropriate</li>
+                <li><strong>Add optional fields</strong> like quotation text and additional links when appropriate</li>
+                <li><strong>Use the Markdown import</strong> feature if you prefer writing in external editors</li>
                 <li><strong>Preview your devotion</strong> using the Preview tab before submitting</li>
                 <li><strong>Submit for review</strong> - leadership will provide feedback if needed</li>
             </ol>
 
             <div class="highlight-box">
-                <strong>Remember:</strong> You can create multiple devotions as part of a series. Plan your series arc in advance and submit devotions in order for the best reader experience.
+                <strong>Remember:</strong> You can create multiple devotions as part of a series. Plan your series arc in advance and submit devotions in order for the best reader experience. The admin system includes JSON export functionality for mobile app integration.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Technical Contributors</div>
+            <p class="content-text">For developers interested in contributing to the admin system or understanding the technical implementation:</p>
+
+            <h3>Development Environment Setup</h3>
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; color: var(--text-secondary);"># Setup
+bundle install
+cp .env.example .env
+
+# Testing
+bundle exec rspec  # Run full test suite
+bundle exec rspec --format documentation  # Detailed output
+
+# Development server
+rerun ruby app.rb  # Auto-reload on changes</pre>
+            </div>
+
+            <h3>Environment Details</h3>
+            <ul>
+                <li><strong>Ruby Version:</strong> 3.4.1 (with multi-version testing on 3.3 and 3.4.1)</li>
+                <li><strong>Framework:</strong> Sinatra with ERB templates</li>
+                <li><strong>Database:</strong> Firebase Realtime Database integration</li>
+                <li><strong>Testing:</strong> 102 comprehensive RSpec tests covering all functionality</li>
+                <li><strong>CI/CD:</strong> GitHub Actions with automated deployment to Fly.io</li>
+                <li><strong>Security:</strong> Session-based authentication with CSRF protection</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Contribution Guidelines:</strong> Use new field names in content creation, test thoroughly with the comprehensive test suite, and ensure backward compatibility when making changes to the JSON structure.
             </div>
         </div>
 
@@ -690,10 +825,11 @@
             <ul>
                 <li><strong>Theological content:</strong> Reach out to church leadership for guidance</li>
                 <li><strong>Technical issues:</strong> Contact the admin team for help with the interface</li>
+                <li><strong>Development setup:</strong> See the technical contributor section above for setup commands</li>
                 <li><strong>Scheduling:</strong> Coordinate with leadership to avoid conflicts and ensure good series flow</li>
                 <li><strong>Writing feedback:</strong> We're happy to provide gentle guidance to help you grow as a devotional writer</li>
             </ul>
-            
+
             <div class="highlight-box">
                 <strong>Our Heart:</strong> We want this to be a joyful opportunity to serve Christ and His people. Don't hesitate to ask for help, feedback, or encouragement along the way!
             </div>
