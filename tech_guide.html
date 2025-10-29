@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Aflame - Technical Guide</title>
+    <style>
+        :root {
+            --bg-primary: #F5F2ED;
+            --bg-card: #FFFFFF;
+            --text-primary: #2C1810;
+            --text-secondary: #5D4E37;
+            --text-accent: #B8A082;
+            --text-muted: #9B8B7A;
+            --border-light: #E8DCC6;
+            --border-accent: #D4A574;
+            --quote-border: #D4A574;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #d4b896 0%, #a0856b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .flame-icon {
+            width: 24px;
+            height: 30px;
+            position: relative;
+        }
+
+        .flame-main {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 22px;
+            background: linear-gradient(180deg, #ff4444 0%, #ff6b35 25%, #f7931e 60%, #ffd23f 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .flame-left {
+            position: absolute;
+            bottom: 2px;
+            left: 1px;
+            width: 10px;
+            height: 16px;
+            background: linear-gradient(180deg, #ff6644 0%, #ff7735 40%, #ffa31e 80%);
+            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+            transform: rotate(-15deg);
+        }
+
+        .flame-right {
+            position: absolute;
+            bottom: 3px;
+            right: 0px;
+            width: 12px;
+            height: 18px;
+            background: linear-gradient(180deg, #ff5544 0%, #ff8035 35%, #ffb31e 75%);
+            border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+            transform: rotate(20deg);
+        }
+
+        .flame-core {
+            position: absolute;
+            bottom: 1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 14px;
+            background: linear-gradient(180deg, #ffaa44 0%, #ffd23f 50%, #fff5aa 100%);
+            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-accent);
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .intro {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .section-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 80px;
+            height: 1px;
+            background: var(--border-light);
+        }
+
+        .section-title::before {
+            left: 0;
+        }
+
+        .section-title::after {
+            right: 0;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+        }
+
+        .quote-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--quote-border);
+        }
+
+        .highlight-box {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--border-accent);
+        }
+
+        .warning-box {
+            background: #FFF8E1;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid #FFB74D;
+        }
+
+        .content-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .section-card {
+                padding: 25px 20px;
+            }
+
+            .section-title::before,
+            .section-title::after {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="flame-icon">
+                        <div class="flame-left"></div>
+                        <div class="flame-main"></div>
+                        <div class="flame-right"></div>
+                        <div class="flame-core"></div>
+                    </div>
+                </div>
+                <span class="logo-text">Heart Aflame</span>
+            </div>
+            <div class="subtitle">Technical Guide</div>
+            <div class="intro">
+                This guide provides technical documentation for developers contributing to the Heart Aflame admin system and infrastructure. Whether you're fixing bugs, adding features, or understanding the architecture, this guide will help you get started.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Admin Application Overview</div>
+            <p class="content-text">Heart Aflame uses a robust admin system for content creation and management. Here's what powers the devotional creation process:</p>
+
+            <h3>Technology Stack</h3>
+            <ul>
+                <li><strong>Backend:</strong> Ruby 3.4.1 with Sinatra framework</li>
+                <li><strong>Database:</strong> Firebase Realtime Database (not Firestore)</li>
+                <li><strong>Templates:</strong> ERB templates with responsive CSS design</li>
+                <li><strong>Testing:</strong> RSpec framework with 102 comprehensive tests</li>
+                <li><strong>Deployment:</strong> Fly.io with Docker and GitHub Actions CI/CD</li>
+            </ul>
+
+            <h3>Admin Features</h3>
+            <ul>
+                <li>Tab-based editor with live preview functionality</li>
+                <li>Author attribution support for guest contributors</li>
+                <li>Enhanced quotation integration (confessional/catechetical references)</li>
+                <li>Additional resources management with URL validation</li>
+                <li>Markdown import with YAML front matter support</li>
+                <li>JSON export functionality for mobile app integration</li>
+                <li>Responsive design optimized for mobile and desktop use</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Quality Assurance:</strong> The admin system includes comprehensive data validation, character limits, format checking, CSRF protection, and real-time synchronization with the mobile app.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>Technology Stack</h2>
+            <p class="content-text">Heart Aflame's admin system is built with modern web technologies focused on simplicity and reliability:</p>
+
+            <h3>Backend</h3>
+            <ul>
+                <li><strong>Ruby 3.4.1</strong> - Primary development language</li>
+                <li><strong>Sinatra Framework</strong> - Lightweight web application framework</li>
+                <li><strong>ERB Templates</strong> - Server-side rendering with embedded Ruby</li>
+            </ul>
+
+            <h3>Database</h3>
+            <ul>
+                <li><strong>Firebase Realtime Database</strong> - Cloud-hosted NoSQL database (not Firestore)</li>
+                <li><strong>JSON Structure</strong> - Date-keyed devotional content with nested fields</li>
+                <li><strong>Real-time Sync</strong> - Changes propagate immediately to mobile apps</li>
+            </ul>
+
+            <h3>Testing & Quality</h3>
+            <ul>
+                <li><strong>RSpec Framework</strong> - Comprehensive test suite with 102 tests</li>
+                <li><strong>Multi-version Testing</strong> - Ruby 3.3 and 3.4.1 compatibility</li>
+                <li><strong>Continuous Integration</strong> - Automated testing on every commit</li>
+            </ul>
+
+            <h3>Deployment</h3>
+            <ul>
+                <li><strong>Fly.io</strong> - Application hosting platform</li>
+                <li><strong>Docker</strong> - Containerized deployment</li>
+                <li><strong>GitHub Actions</strong> - Automated CI/CD pipeline</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Design Philosophy:</strong> The stack prioritizes developer productivity, maintainability, and reliable deployment. Simple is better than complex, and proven technologies are preferred over cutting-edge alternatives.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Technical Implementation</div>
+
+            <h3>Admin Interface Features</h3>
+            <ul>
+                <li><strong>Tab-based Editor</strong> - Separate edit and preview modes for devotional creation</li>
+                <li><strong>Live Preview</strong> - Real-time rendering of devotional content as you type</li>
+                <li><strong>Author Attribution</strong> - Support for guest contributors with author metadata</li>
+                <li><strong>Enhanced Quotations</strong> - Integration of confessional and catechetical references</li>
+                <li><strong>Additional Resources</strong> - URL management with validation and formatting checks</li>
+                <li><strong>Markdown Import</strong> - YAML front matter support for external content creation</li>
+                <li><strong>JSON Export</strong> - Mobile app integration with automated format conversion</li>
+                <li><strong>Responsive Design</strong> - Optimized for both mobile and desktop interfaces</li>
+            </ul>
+
+            <h3>Security & Authentication</h3>
+            <ul>
+                <li><strong>Session-based Authentication</strong> - Secure user login and session management</li>
+                <li><strong>CSRF Protection</strong> - Built-in cross-site request forgery prevention</li>
+                <li><strong>Environment Variables</strong> - Secure configuration management via .env files</li>
+                <li><strong>Firebase Admin SDK</strong> - Server-side database access with full privileges</li>
+            </ul>
+
+            <h3>Data Validation</h3>
+            <ul>
+                <li><strong>Field Requirements</strong> - Required field validation on form submission</li>
+                <li><strong>Character Limits</strong> - Enforced length constraints for optimal readability</li>
+                <li><strong>Format Checking</strong> - Date, URL, and reference format validation</li>
+                <li><strong>Duplicate Detection</strong> - Prevention of conflicting devotional dates</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">JSON Data Structure</div>
+            <p class="content-text">The admin system uses a structured JSON format for storing devotional content in Firebase Realtime Database:</p>
+
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; overflow-x: auto; color: var(--text-secondary);">{
+  "daily": {
+    "YYYY-MM-DD": {
+      "dailyDevo": {
+        "title": "Devotional Title",
+        "author": "Author Name (optional)",
+        "scriptureRef": "Bible Reference",
+        "scriptureText": "Scripture verse text",
+        "reflection": "Main devotional content",
+        "quotationText": "Quote from confession/catechism (optional)",
+        "quotationRef": "Source reference (optional)",
+        "prayerPrompt": "Prayer guidance (optional)",
+        "goDeeper": "Additional study suggestions (optional)",
+        "additionalLinks": [
+          {
+            "title": "Link Title",
+            "url": "https://example.com"
+          }
+        ]
+      }
+    }
+  }
+}</pre>
+            </div>
+
+            <h3>Key Design Decisions</h3>
+            <ul>
+                <li><strong>Date-based Keys</strong> - Devotionals indexed by YYYY-MM-DD format for efficient queries</li>
+                <li><strong>Nested Structure</strong> - Daily devotional content nested under date keys</li>
+                <li><strong>Optional Fields</strong> - Flexible structure supports rich or minimal content</li>
+                <li><strong>Array Support</strong> - Additional links stored as arrays for multiple resources</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>Migration Note:</strong> The admin system gracefully handles both old and new JSON formats during transition. Legacy devotionals continue to work while new devotionals use the enhanced structure with automatic format conversion for mobile app compatibility.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Development Environment Setup</div>
+
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>Ruby 3.3 or 3.4.1 installed</li>
+                <li>Bundler gem installed</li>
+                <li>Firebase project with Realtime Database</li>
+                <li>Firebase Admin SDK credentials</li>
+            </ul>
+
+            <h3>Initial Setup</h3>
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; color: var(--text-secondary);"># Clone the repository
+git clone [repository-url]
+cd heart-aflame-admin
+
+# Install dependencies
+bundle install
+
+# Configure environment variables
+cp .env.example .env
+# Edit .env with your Firebase credentials
+
+# Run tests to verify setup
+bundle exec rspec
+
+# Start development server
+rerun ruby app.rb</pre>
+            </div>
+
+            <h3>Environment Variables</h3>
+            <p class="content-text">Create a <code>.env</code> file with the following variables:</p>
+            <ul>
+                <li><strong>FIREBASE_PROJECT_ID</strong> - Your Firebase project ID</li>
+                <li><strong>FIREBASE_CLIENT_EMAIL</strong> - Service account email</li>
+                <li><strong>FIREBASE_PRIVATE_KEY</strong> - Service account private key</li>
+                <li><strong>SESSION_SECRET</strong> - Random string for session encryption</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Security Note:</strong> Never commit the .env file to version control. Use .env.example as a template with placeholder values.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Testing</div>
+
+            <h3>Running Tests</h3>
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; color: var(--text-secondary);"># Run full test suite
+bundle exec rspec
+
+# Run with detailed output
+bundle exec rspec --format documentation
+
+# Run specific test file
+bundle exec rspec spec/app_spec.rb
+
+# Run specific test line
+bundle exec rspec spec/app_spec.rb:42</pre>
+            </div>
+
+            <h3>Test Coverage</h3>
+            <ul>
+                <li><strong>Route Testing</strong> - All HTTP endpoints tested for correct responses</li>
+                <li><strong>Form Validation</strong> - Required fields, format checking, and error handling</li>
+                <li><strong>Authentication</strong> - Login, logout, and session management</li>
+                <li><strong>Data Persistence</strong> - Firebase database read/write operations</li>
+                <li><strong>Markdown Import</strong> - YAML parsing and content extraction</li>
+                <li><strong>JSON Export</strong> - Format conversion and mobile app compatibility</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Test-Driven Development:</strong> Write tests before implementing new features. All pull requests must include tests for new functionality.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Deployment</div>
+
+            <h3>Automated Deployment</h3>
+            <p class="content-text">The application deploys automatically to Fly.io when changes are pushed to the main branch:</p>
+
+            <ol>
+                <li>Push commits to the main branch</li>
+                <li>GitHub Actions runs the test suite</li>
+                <li>If tests pass, Docker image is built</li>
+                <li>Image is deployed to Fly.io</li>
+                <li>Health checks verify successful deployment</li>
+            </ol>
+
+            <h3>Manual Deployment</h3>
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; color: var(--text-secondary);"># Install Fly.io CLI
+curl -L https://fly.io/install.sh | sh
+
+# Login to Fly.io
+fly auth login
+
+# Deploy application
+fly deploy
+
+# Check deployment status
+fly status
+
+# View application logs
+fly logs</pre>
+            </div>
+
+            <h3>Environment Configuration</h3>
+            <p class="content-text">Set production environment variables using Fly.io secrets:</p>
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; color: var(--text-secondary);">fly secrets set FIREBASE_PROJECT_ID="your-project-id"
+fly secrets set FIREBASE_CLIENT_EMAIL="your-email"
+fly secrets set FIREBASE_PRIVATE_KEY="your-key"
+fly secrets set SESSION_SECRET="random-string"</pre>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Repository Structure</div>
+
+            <p class="content-text">The codebase follows a simple, organized structure:</p>
+
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; color: var(--text-secondary);">heart-aflame-admin/
+├── app.rb                 # Main Sinatra application
+├── config.ru              # Rack configuration
+├── Gemfile                # Ruby dependencies
+├── Dockerfile             # Container configuration
+├── fly.toml               # Fly.io deployment config
+├── .github/
+│   └── workflows/
+│       └── deploy.yml     # CI/CD pipeline
+├── views/
+│   ├── layout.erb         # Base template layout
+│   ├── index.erb          # Calendar view
+│   ├── editor.erb         # Devotion editor
+│   └── preview.erb        # Preview template
+├── public/
+│   ├── css/               # Stylesheets
+│   └── js/                # Client-side scripts
+└── spec/
+    ├── spec_helper.rb     # Test configuration
+    └── app_spec.rb        # Application tests</pre>
+            </div>
+
+            <h3>Key Files</h3>
+            <ul>
+                <li><strong>app.rb</strong> - Core application logic, routes, and Firebase integration</li>
+                <li><strong>views/editor.erb</strong> - Devotional creation and editing interface</li>
+                <li><strong>spec/app_spec.rb</strong> - Comprehensive test suite covering all features</li>
+                <li><strong>.github/workflows/deploy.yml</strong> - Automated deployment pipeline</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Development Workflow</div>
+
+            <h3>Feature Development</h3>
+            <ol>
+                <li><strong>Create Feature Branch</strong> - Branch from main for new work</li>
+                <li><strong>Write Tests First</strong> - Define expected behavior with RSpec tests</li>
+                <li><strong>Implement Feature</strong> - Write code to make tests pass</li>
+                <li><strong>Run Test Suite</strong> - Verify all tests pass locally</li>
+                <li><strong>Manual Testing</strong> - Test feature in development environment</li>
+                <li><strong>Submit Pull Request</strong> - Request code review from maintainers</li>
+                <li><strong>Address Feedback</strong> - Make requested changes</li>
+                <li><strong>Merge to Main</strong> - Deploy via automated pipeline</li>
+            </ol>
+
+            <h3>Code Style Guidelines</h3>
+            <ul>
+                <li>Follow Ruby community style conventions</li>
+                <li>Use meaningful variable and method names</li>
+                <li>Keep methods short and focused (under 20 lines)</li>
+                <li>Add comments for complex logic</li>
+                <li>Maintain consistent indentation (2 spaces)</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Contribution Guidelines:</strong> Use new field names in content creation, test thoroughly with the comprehensive test suite, and ensure backward compatibility when making changes to the JSON structure.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Markdown Import Format</div>
+            <p class="content-text">The admin system supports importing devotional content via Markdown files with YAML front matter. This is useful for batch imports or external content creation:</p>
+
+            <div class="quote-card">
+                <pre style="font-size: 14px; line-height: 1.4; overflow-x: auto; color: var(--text-secondary);">---
+title: "Devotional Title"
+date: YYYY-MM-DD
+author: "Author Name (optional)"
+scripture_reference: "Bible Reference"
+confessional_tie_in: "Quotation text (optional)"
+confession_reference: "Reference source (optional)"
+prayer: "Prayer prompt (optional)"
+go_deeper: "Study suggestions (optional)"
+additional_links:
+  - title: "Resource Title"
+    url: "https://example.com"
+---
+
+## Scripture Text
+[Scripture verse text]
+
+## Reflection
+[Main devotional content]</pre>
+            </div>
+
+            <h3>Import Process</h3>
+            <ol>
+                <li>Content creators write devotionals in Markdown format</li>
+                <li>YAML front matter contains metadata fields</li>
+                <li>Markdown sections provide main content</li>
+                <li>Admin system parses YAML and extracts content</li>
+                <li>Automatic conversion to JSON database format</li>
+                <li>Validation ensures all required fields present</li>
+            </ol>
+
+            <div class="highlight-box">
+                <strong>Note:</strong> The YAML front matter field names differ slightly from the JSON structure for readability. The admin system automatically converts between formats during import and export.
+            </div>
+        </div>
+
+        <div class="section-card">
+            <div class="section-title">Questions & Support</div>
+            <p class="content-text">Need help with technical issues or development?</p>
+
+            <ul>
+                <li><strong>Setup Issues:</strong> Review the development environment setup section above</li>
+                <li><strong>Test Failures:</strong> Check RSpec output for detailed error messages</li>
+                <li><strong>Deployment Problems:</strong> Review Fly.io logs with <code>fly logs</code></li>
+                <li><strong>Firebase Errors:</strong> Verify credentials and database permissions</li>
+                <li><strong>Feature Requests:</strong> Contact the admin team to discuss enhancements</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Contributing:</strong> We welcome technical contributions! Whether you're fixing bugs, improving performance, or adding features, your help makes Heart Aflame better for everyone. Start by reviewing open issues and submitting pull requests.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

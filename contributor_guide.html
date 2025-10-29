@@ -498,66 +498,34 @@
         </div>
 
         <div class="section-card">
-            <div class="section-title">Admin Application Overview</div>
-            <p class="content-text">Heart Aflame uses a robust admin system for content creation and management. Here's what powers the devotional creation process:</p>
+            <div class="section-title">Using the Admin Interface</div>
 
-            <h3>Technology Stack</h3>
-            <ul>
-                <li><strong>Backend:</strong> Ruby 3.4.1 with Sinatra framework</li>
-                <li><strong>Database:</strong> Firebase Realtime Database (not Firestore)</li>
-                <li><strong>Templates:</strong> ERB templates with responsive CSS design</li>
-                <li><strong>Testing:</strong> RSpec framework with 102 comprehensive tests</li>
-                <li><strong>Deployment:</strong> Fly.io with Docker and GitHub Actions CI/CD</li>
-            </ul>
+            <h3>Getting Started</h3>
+            <p class="content-text">To create devotional content, you'll need to access the Heart Aflame admin system:</p>
 
-            <h3>Admin Features</h3>
-            <ul>
-                <li>Tab-based editor with live preview functionality</li>
-                <li>Author attribution support for guest contributors</li>
-                <li>Enhanced quotation integration (confessional/catechetical references)</li>
-                <li>Additional resources management with URL validation</li>
-                <li>Markdown import with YAML front matter support</li>
-                <li>JSON export functionality for mobile app integration</li>
-                <li>Responsive design optimized for mobile and desktop use</li>
-            </ul>
+            <ol>
+                <li><strong>Visit the admin login page</strong> at <a href="https://admin.heartafla.me/login" style="color: var(--text-accent); text-decoration: none; font-weight: 600;">admin.heartafla.me/login</a></li>
+                <li><strong>Log in with your credentials</strong> provided by leadership</li>
+                <li><strong>You'll be taken to the calendar view</strong> where you can see existing devotions and available dates</li>
+            </ol>
 
             <div class="highlight-box">
-                <strong>Quality Assurance:</strong> The admin system includes comprehensive data validation, character limits, format checking, CSRF protection, and real-time synchronization with the mobile app.
-            </div>
-        </div>
-
-        <div class="section-card">
-            <div class="section-title">Current JSON Data Structure</div>
-            <p class="content-text">The admin system uses the following JSON structure for storing devotional content (updated 2024):</p>
-
-            <div class="quote-card">
-                <pre style="font-size: 14px; line-height: 1.4; overflow-x: auto; color: var(--text-secondary);">{
-  "daily": {
-    "YYYY-MM-DD": {
-      "dailyDevo": {
-        "title": "Devotional Title",
-        "author": "Author Name (optional)",
-        "scriptureRef": "Bible Reference",
-        "scriptureText": "Scripture verse text",
-        "reflection": "Main devotional content",
-        "quotationText": "Quote from confession/catechism (optional)",
-        "quotationRef": "Source reference (optional)",
-        "prayerPrompt": "Prayer guidance (optional)",
-        "goDeeper": "Additional study suggestions (optional)",
-        "additionalLinks": [
-          {
-            "title": "Link Title",
-            "url": "https://example.com"
-          }
-        ]
-      }
-    }
-  }
-}</pre>
+                <strong>Need Access?</strong> If you don't have login credentials yet, contact church leadership to request contributor access to the admin system.
             </div>
 
-            <div class="warning-box">
-                <strong>Migration Note:</strong> The admin system gracefully handles both old and new JSON formats during transition. Legacy devotionals continue to work while new devotionals use the enhanced structure with automatic format conversion for mobile app compatibility.
+            <h3>Creating a Devotion</h3>
+            <ol>
+                <li><strong>Access the calendar</strong> to select your desired date(s) for publication</li>
+                <li><strong>Click "Create Devotion"</strong> to open the editor interface</li>
+                <li><strong>Fill in all required fields</strong> (marked with asterisks in the system)</li>
+                <li><strong>Add optional fields</strong> like quotation text and additional links when appropriate</li>
+                <li><strong>Use the Markdown import</strong> feature if you prefer writing in external editors</li>
+                <li><strong>Preview your devotion</strong> using the Preview tab before submitting</li>
+                <li><strong>Submit for review</strong> - leadership will provide feedback if needed</li>
+            </ol>
+
+            <div class="highlight-box">
+                <strong>Remember:</strong> You can create multiple devotions as part of a series. Plan your series arc in advance and submit devotions in order for the best reader experience. The admin system includes JSON export functionality for mobile app integration.
             </div>
         </div>
 
@@ -770,62 +738,11 @@ additional_links:
         </div>
 
         <div class="section-card">
-            <div class="section-title">Using the Admin Interface</div>
-            <ol>
-                <li><strong>Access the calendar</strong> to select your desired date(s) for publication</li>
-                <li><strong>Click "Create Devotion"</strong> to open the editor interface</li>
-                <li><strong>Fill in all required fields</strong> (marked with asterisks in the system)</li>
-                <li><strong>Add optional fields</strong> like quotation text and additional links when appropriate</li>
-                <li><strong>Use the Markdown import</strong> feature if you prefer writing in external editors</li>
-                <li><strong>Preview your devotion</strong> using the Preview tab before submitting</li>
-                <li><strong>Submit for review</strong> - leadership will provide feedback if needed</li>
-            </ol>
-
-            <div class="highlight-box">
-                <strong>Remember:</strong> You can create multiple devotions as part of a series. Plan your series arc in advance and submit devotions in order for the best reader experience. The admin system includes JSON export functionality for mobile app integration.
-            </div>
-        </div>
-
-        <div class="section-card">
-            <div class="section-title">Technical Contributors</div>
-            <p class="content-text">For developers interested in contributing to the admin system or understanding the technical implementation:</p>
-
-            <h3>Development Environment Setup</h3>
-            <div class="quote-card">
-                <pre style="font-size: 14px; line-height: 1.4; color: var(--text-secondary);"># Setup
-bundle install
-cp .env.example .env
-
-# Testing
-bundle exec rspec  # Run full test suite
-bundle exec rspec --format documentation  # Detailed output
-
-# Development server
-rerun ruby app.rb  # Auto-reload on changes</pre>
-            </div>
-
-            <h3>Environment Details</h3>
-            <ul>
-                <li><strong>Ruby Version:</strong> 3.4.1 (with multi-version testing on 3.3 and 3.4.1)</li>
-                <li><strong>Framework:</strong> Sinatra with ERB templates</li>
-                <li><strong>Database:</strong> Firebase Realtime Database integration</li>
-                <li><strong>Testing:</strong> 102 comprehensive RSpec tests covering all functionality</li>
-                <li><strong>CI/CD:</strong> GitHub Actions with automated deployment to Fly.io</li>
-                <li><strong>Security:</strong> Session-based authentication with CSRF protection</li>
-            </ul>
-
-            <div class="highlight-box">
-                <strong>Contribution Guidelines:</strong> Use new field names in content creation, test thoroughly with the comprehensive test suite, and ensure backward compatibility when making changes to the JSON structure.
-            </div>
-        </div>
-
-        <div class="section-card">
             <div class="section-title">Questions & Support</div>
             <p class="content-text">This is a volunteer ministry, and we're grateful for your willingness to serve! If you have questions about:</p>
             <ul>
                 <li><strong>Theological content:</strong> Reach out to church leadership for guidance</li>
-                <li><strong>Technical issues:</strong> Contact the admin team for help with the interface</li>
-                <li><strong>Development setup:</strong> See the technical contributor section above for setup commands</li>
+                <li><strong>Admin interface:</strong> Contact the admin team for help with the devotion editor</li>
                 <li><strong>Scheduling:</strong> Coordinate with leadership to avoid conflicts and ensure good series flow</li>
                 <li><strong>Writing feedback:</strong> We're happy to provide gentle guidance to help you grow as a devotional writer</li>
             </ul>
