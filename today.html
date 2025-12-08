@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Devotional - Heart Aflame</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    <style>
+        :root {
+            --bg-primary: #F8F6F3;
+            --bg-card: #FFFFFF;
+            --text-primary: #2C1810;
+            --text-secondary: #5D4E37;
+            --text-accent: #8B7355;
+            --text-muted: #9B8B7A;
+            --border-light: #F0E6D2;
+            --border-accent: #D4A574;
+            --quote-bg: #FDFCFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 0;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #d4b896 0%, #a0856b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .flame-icon {
+            width: 24px;
+            height: 30px;
+            position: relative;
+        }
+
+        .flame-main {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 22px;
+            background: linear-gradient(180deg, #ff4444 0%, #ff6b35 25%, #f7931e 60%, #ffd23f 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .flame-left {
+            position: absolute;
+            bottom: 2px;
+            left: 1px;
+            width: 10px;
+            height: 16px;
+            background: linear-gradient(180deg, #ff6644 0%, #ff7735 40%, #ffa31e 80%);
+            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+            transform: rotate(-15deg);
+        }
+
+        .flame-right {
+            position: absolute;
+            bottom: 3px;
+            right: 0px;
+            width: 12px;
+            height: 18px;
+            background: linear-gradient(180deg, #ff5544 0%, #ff8035 35%, #ffb31e 75%);
+            border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+            transform: rotate(20deg);
+        }
+
+        .flame-core {
+            position: absolute;
+            bottom: 1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 14px;
+            background: linear-gradient(180deg, #ffaa44 0%, #ffd23f 50%, #fff5aa 100%);
+            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-accent);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--border-accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 0 100px;
+        }
+
+        .devotional-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .devotional-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .devotional-date {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--border-accent);
+            margin-bottom: 15px;
+        }
+
+        .devotional-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .devotional-author {
+            font-size: 16px;
+            color: var(--text-accent);
+            font-style: italic;
+        }
+
+        .devotional-card {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--border-accent);
+            margin-bottom: 15px;
+        }
+
+        .scripture-box {
+            background: var(--quote-bg);
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid var(--border-accent);
+        }
+
+        .scripture-ref {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--border-accent);
+            margin-bottom: 12px;
+        }
+
+        .scripture-text {
+            font-size: 18px;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .reflection-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .reflection-text p,
+        .quotation-text p,
+        .prayer-text p,
+        .go-deeper-text p {
+            margin-bottom: 15px;
+        }
+
+        .reflection-text p:last-child,
+        .quotation-text p:last-child,
+        .prayer-text p:last-child,
+        .go-deeper-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .quotation-box {
+            background: var(--quote-bg);
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid var(--border-accent);
+        }
+
+        .quotation-text {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .quotation-ref {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-accent);
+            text-align: right;
+        }
+
+        .prayer-box {
+            background: var(--quote-bg);
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid var(--border-accent);
+            text-align: center;
+        }
+
+        .prayer-text {
+            font-size: 16px;
+            color: var(--text-accent);
+            font-weight: 500;
+            line-height: 1.7;
+        }
+
+        .go-deeper-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .additional-links {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .additional-links li {
+            margin-bottom: 10px;
+        }
+
+        .additional-links a {
+            color: var(--border-accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .additional-links a:hover {
+            color: var(--text-accent);
+            text-decoration: underline;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-light);
+            border-top: 4px solid var(--border-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 16px;
+            color: var(--text-accent);
+        }
+
+        /* Error State */
+        .error {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .error-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .retry-button {
+            display: inline-block;
+            background: var(--border-accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 8px rgba(212, 165, 116, 0.3);
+        }
+
+        .retry-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(160, 133, 107, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+
+            .devotional-title {
+                font-size: 28px;
+            }
+
+            .devotional-card {
+                padding: 24px;
+            }
+
+            .scripture-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <div class="logo-icon">
+                        <div class="flame-icon">
+                            <div class="flame-left"></div>
+                            <div class="flame-main"></div>
+                            <div class="flame-right"></div>
+                            <div class="flame-core"></div>
+                        </div>
+                    </div>
+                    <span class="logo-text">Heart Aflame</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/today">Today</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div id="loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Loading today's devotional...</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <h2 class="error-title">Unable to Load Devotional</h2>
+                <p class="error-message" id="error-message">We encountered an error loading today's devotional. Please try again.</p>
+                <button class="retry-button" onclick="loadDevotional()">Retry</button>
+            </div>
+
+            <div id="devotional-content" class="devotional-container" style="display: none;">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Get today's date in YYYY-MM-DD format
+        function getTodayDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Format date for display
+        function formatDateForDisplay(dateString) {
+            const date = new Date(dateString + 'T00:00:00');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Load devotional from API
+        async function loadDevotional() {
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+            const contentEl = document.getElementById('devotional-content');
+
+            // Reset states
+            loadingEl.style.display = 'block';
+            errorEl.style.display = 'none';
+            contentEl.style.display = 'none';
+
+            try {
+                const todayDate = getTodayDate();
+                const response = await fetch(`https://admin.heartafla.me/api/v1/devo/${todayDate}`);
+
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error('No devotional available for today yet. Please check back later.');
+                    } else if (response.status === 400) {
+                        throw new Error('Invalid date format. Please contact support.');
+                    } else {
+                        throw new Error('Failed to load devotional. Please try again later.');
+                    }
+                }
+
+                const data = await response.json();
+                renderDevotional(data);
+
+                loadingEl.style.display = 'none';
+                contentEl.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading devotional:', error);
+                loadingEl.style.display = 'none';
+                errorEl.style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+            }
+        }
+
+        // Render devotional content
+        function renderDevotional(data) {
+            const contentEl = document.getElementById('devotional-content');
+
+            let html = `
+                <div class="devotional-header">
+                    <div class="devotional-date">${formatDateForDisplay(data.date)}</div>
+                    <h1 class="devotional-title">${escapeHtml(data.title)}</h1>
+                    ${data.author ? `<div class="devotional-author">by ${escapeHtml(data.author)}</div>` : ''}
+                </div>
+
+                <div class="devotional-card">
+            `;
+
+            // Scripture section
+            if (data.scriptureRef || data.scriptureText) {
+                html += `
+                    <div class="section">
+                        <div class="scripture-box">
+                            ${data.scriptureRef ? `<div class="scripture-ref">${escapeHtml(data.scriptureRef)}</div>` : ''}
+                            ${data.scriptureText ? `<div class="scripture-text">${escapeHtml(data.scriptureText)}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Reflection section
+            if (data.reflection) {
+                html += `
+                    <div class="section">
+                        <h3 class="section-title">Reflection</h3>
+                        <div class="reflection-text">${formatText(data.reflection)}</div>
+                    </div>
+                `;
+            }
+
+            // Quotation section
+            if (data.quotationText || data.quotationRef) {
+                html += `
+                    <div class="section">
+                        <div class="quotation-box">
+                            ${data.quotationText ? `<div class="quotation-text">${formatText(data.quotationText)}</div>` : ''}
+                            ${data.quotationRef ? `<div class="quotation-ref">— ${escapeHtml(data.quotationRef)}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Prayer section
+            if (data.prayerPrompt) {
+                html += `
+                    <div class="section">
+                        <h3 class="section-title">Prayer</h3>
+                        <div class="prayer-box">
+                            <div class="prayer-text">${formatText(data.prayerPrompt)}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Go Deeper section
+            if (data.goDeeper || (data.additionalLinks && data.additionalLinks.length > 0)) {
+                html += `<div class="section">`;
+                html += `<h3 class="section-title">Go Deeper</h3>`;
+
+                if (data.goDeeper) {
+                    html += `<div class="go-deeper-text">${formatText(data.goDeeper)}</div>`;
+                }
+
+                if (data.additionalLinks && data.additionalLinks.length > 0) {
+                    html += `<ul class="additional-links">`;
+                    data.additionalLinks.forEach(link => {
+                        html += `<li><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.title)}</a></li>`;
+                    });
+                    html += `</ul>`;
+                }
+
+                html += `</div>`;
+            }
+
+            html += `</div>`;
+
+            contentEl.innerHTML = html;
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Convert line breaks to HTML paragraphs
+        function formatText(text) {
+            if (!text) return '';
+
+            // Escape HTML first
+            const escaped = escapeHtml(text);
+
+            // Convert \r\n\r\n to paragraph breaks
+            const paragraphs = escaped.split(/\r\n\r\n|\n\n/);
+
+            // Wrap each paragraph in <p> tags, and convert single line breaks to <br>
+            return paragraphs
+                .map(p => {
+                    const withBreaks = p.replace(/\r\n|\n/g, '<br>');
+                    return `<p>${withBreaks}</p>`;
+                })
+                .join('');
+        }
+
+        // Load devotional on page load
+        loadDevotional();
+    </script>
+</body>
+</html>
