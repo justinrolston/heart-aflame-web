@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart Aflame</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="alternate icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="icon.png">
     <style>
         :root {
             --bg-primary: #F8F6F3;
@@ -68,61 +67,15 @@
             width: 40px;
             height: 40px;
             border-radius: 10px;
-            background: linear-gradient(135deg, #d4b896 0%, #a0856b 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
         }
-        
-        .flame-icon {
-            width: 24px;
-            height: 30px;
-            position: relative;
-        }
-        
-        .flame-main {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 16px;
-            height: 22px;
-            background: linear-gradient(180deg, #ff4444 0%, #ff6b35 25%, #f7931e 60%, #ffd23f 100%);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-        }
-        
-        .flame-left {
-            position: absolute;
-            bottom: 2px;
-            left: 1px;
-            width: 10px;
-            height: 16px;
-            background: linear-gradient(180deg, #ff6644 0%, #ff7735 40%, #ffa31e 80%);
-            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
-            transform: rotate(-15deg);
-        }
-        
-        .flame-right {
-            position: absolute;
-            bottom: 3px;
-            right: 0px;
-            width: 12px;
-            height: 18px;
-            background: linear-gradient(180deg, #ff5544 0%, #ff8035 35%, #ffb31e 75%);
-            border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
-            transform: rotate(20deg);
-        }
-        
-        .flame-core {
-            position: absolute;
-            bottom: 1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 8px;
-            height: 14px;
-            background: linear-gradient(180deg, #ffaa44 0%, #ffd23f 50%, #fff5aa 100%);
-            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
         }
         
         .logo-text {
@@ -432,12 +385,7 @@
             <nav class="nav">
                 <a href="#" class="logo">
                     <div class="logo-icon">
-                        <div class="flame-icon">
-                            <div class="flame-left"></div>
-                            <div class="flame-main"></div>
-                            <div class="flame-right"></div>
-                            <div class="flame-core"></div>
-                        </div>
+                        <img src="icon.png" alt="Heart Aflame Icon">
                     </div>
                     <span class="logo-text">Heart Aflame</span>
                 </a>
