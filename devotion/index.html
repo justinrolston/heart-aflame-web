@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Today's Devotional - Heart Aflame</title>
-    <link rel="icon" type="image/png" href="icon.png">
-    <link rel="stylesheet" href="devotional-shared.css">
+    <title>Devotional - Heart Aflame</title>
+    <link rel="icon" type="image/png" href="../icon.png">
+    <link rel="stylesheet" href="../devotional-shared.css">
 </head>
 <body>
     <header class="header">
@@ -13,7 +13,7 @@
             <nav class="nav">
                 <a href="/" class="logo">
                     <div class="logo-icon">
-                        <img src="icon.png" alt="Heart Aflame Icon">
+                        <img src="../icon.png" alt="Heart Aflame Icon">
                     </div>
                     <span class="logo-text">Heart Aflame</span>
                 </a>
@@ -29,13 +29,13 @@
         <div class="container">
             <div id="loading" class="loading">
                 <div class="loading-spinner"></div>
-                <p class="loading-text">Loading today's devotional...</p>
+                <p class="loading-text">Loading devotional...</p>
             </div>
 
             <div id="error" class="error" style="display: none;">
                 <div class="error-icon">⚠️</div>
                 <h2 class="error-title">Unable to Load Devotional</h2>
-                <p class="error-message" id="error-message">We encountered an error loading today's devotional. Please try again.</p>
+                <p class="error-message" id="error-message">We encountered an error loading this devotional. Please try again.</p>
                 <button class="retry-button" onclick="loadDevotional()">Retry</button>
             </div>
 
@@ -45,10 +45,18 @@
         </div>
     </main>
 
-    <script src="devotional-shared.js"></script>
+    <script src="../devotional-shared.js"></script>
     <script>
-        // Get today's date in YYYY-MM-DD format
-        function getTodayDate() {
+        // Parse date from URL query string or default to today
+        function getDateFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const dateParam = urlParams.get('date');
+
+            if (dateParam) {
+                return dateParam;
+            }
+
+            // Default to today if no date in URL
             const today = new Date();
             const year = today.getFullYear();
             const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -68,14 +76,25 @@
             contentEl.style.display = 'none';
 
             try {
-                const todayDate = getTodayDate();
-                const response = await fetch(`https://admin.heartafla.me/api/v1/devo/${todayDate}`);
+                const dateString = getDateFromUrl();
+
+                // Validate date
+                if (!isValidDate(dateString)) {
+                    // Redirect to 404
+                    window.location.href = '/404.html';
+                    return;
+                }
+
+                const response = await fetch(`https://admin.heartafla.me/api/v1/devo/${dateString}`);
 
                 if (!response.ok) {
                     if (response.status === 404) {
-                        throw new Error('No devotional available for today yet. Please check back later.');
+                        // Redirect to 404 page
+                        window.location.href = '/404.html';
+                        return;
                     } else if (response.status === 400) {
-                        throw new Error('Invalid date format. Please contact support.');
+                        window.location.href = '/404.html';
+                        return;
                     } else {
                         throw new Error('Failed to load devotional. Please try again later.');
                     }

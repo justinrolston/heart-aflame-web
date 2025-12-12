@@ -1,6 +1,17 @@
-# Heart Aflame - Marketing Website
+# Heart Aflame - Website
 
-A sophisticated marketing landing page for the Heart Aflame confessional devotional app, featuring email collection and a design system inspired by Reformed Micro Learning.
+A static website for the Heart Aflame confessional devotional app, featuring a marketing landing page with email collection, daily devotional viewing pages, and a design system inspired by Reformed Micro Learning.
+
+## Features
+
+- **Marketing Landing Page** (`index.html`) - Email signup for early access
+- **Devotional Viewing**:
+  - `/today` - Always displays today's devotional
+  - `/devotion/?date=YYYY-MM-DD` - View any devotional by date
+- **Audio Support** - HTML5 audio player for devotionals with MP3 files
+- **Date Navigation** - Browse backward through devotionals with "Previous Day" links
+- **API Integration** - Dynamic content from `admin.heartafla.me` API
+- **Shared Code Architecture** - Reusable CSS and JavaScript for maintainability
 
 ## Design System
 
@@ -79,6 +90,63 @@ Font weights and sizes are defined inline. Key selectors:
 - `.features h2`, `.sample h2` - Section headers
 - `.feature-card h3` - Feature titles
 - Body text uses default 16px with 1.6-1.7 line-height
+
+## File Structure
+
+```
+.
+├── index.html                  # Marketing landing page
+├── today.html                  # Today's devotional page
+├── devotion/
+│   └── index.html             # Date-specific devotional viewer
+├── devotional-shared.css      # Shared styles for devotional pages
+├── devotional-shared.js       # Shared JavaScript for devotional rendering
+└── google-apps-script.js      # Backend for email collection
+```
+
+## Technical Details
+
+### Devotional Pages Architecture
+
+Both `today.html` and `devotion/index.html` use shared resources for code reuse:
+
+- **`devotional-shared.css`** - All styling (381 lines)
+  - Color system, typography, component styles
+  - Audio player styling
+  - Navigation buttons, loading/error states
+
+- **`devotional-shared.js`** - Core functionality (157 lines)
+  - `renderDevotional()` - Renders complete devotional from API data
+  - `formatDateForDisplay()` - Human-readable date formatting
+  - `isValidDate()` - Date validation
+  - `getPreviousDate()` - Calculate previous day
+  - `escapeHtml()` - XSS protection
+  - `formatText()` - Convert line breaks to HTML
+
+### API Integration
+
+Devotionals are fetched from: `https://admin.heartafla.me/api/v1/devo/{YYYY-MM-DD}`
+
+Expected JSON structure:
+```json
+{
+  "date": "2026-01-03",
+  "title": "Devotional Title",
+  "author": "Author Name",
+  "scriptureRef": "Romans 11:33-34",
+  "scriptureText": "Scripture passage...",
+  "reflection": "Main reflection content...",
+  "quotationText": "Historical quote...",
+  "quotationRef": "Citation",
+  "prayerPrompt": "Prayer text...",
+  "goDeeper": "Additional resources...",
+  "additionalLinks": [{"title": "Link", "url": "https://..."}],
+  "audio": {
+    "status": "completed",
+    "url": "https://...audio.mp3"
+  }
+}
+```
 
 ## Email Collection
 
